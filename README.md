@@ -1,46 +1,92 @@
-# Getting Started with Create React App
+# RAG Chat Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This application provides a chat interface that connects to an n8n workflow for RAG (Retrieval Augmented Generation) document assistance.
 
-## Available Scripts
+## Setup Instructions
 
-In the project directory, you can run:
+### Prerequisites
+- Node.js (version 14 or higher)
+- npm (comes with Node.js)
+- An active n8n workflow on n8n cloud
 
-### `npm start`
+### Configuration Steps
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. **Configure the n8n Webhook URL**: 
+   - Copy `.env.example` to `.env`:
+     ```
+     cp .env.example .env
+     ```
+   - Edit the `.env` file and update the `REACT_APP_N8N_WEBHOOK_URL` with your actual n8n webhook URL from the "When chat message received" node in your workflow.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+2. **Install dependencies**: 
+   ```
+   npm install
+   ```
 
-### `npm test`
+3. **Start the development server**:
+   ```
+   npm start
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+4. **Build for production**:
+   ```
+   npm run build
+   ```
+   The build artifacts will be in the `build` folder.
 
-### `npm run build`
+## Deployment Options
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Option 1: Static Site Hosting
+You can deploy the built app to any static site hosting service:
+- Netlify
+- Vercel
+- GitHub Pages
+- AWS S3 + CloudFront
+- Firebase Hosting
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+When using a static site hosting service, make sure to configure the environment variable for the webhook URL according to the platform's instructions.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Option 2: Docker Deployment
+You can containerize the application and deploy it using Docker:
 
-### `npm run eject`
+1. Build the Docker container (make sure to have your `.env` file set up first):
+   ```
+   docker build -t rag-chat-app .
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+2. Run the Docker container:
+   ```
+   docker run -p 80:80 rag-chat-app
+   ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   Or with an environment variable:
+   ```
+   docker run -p 80:80 -e REACT_APP_N8N_WEBHOOK_URL=https://your-instance.n8n.cloud/webhook/your-webhook-id rag-chat-app
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Features
+- Real-time chat interface
+- Session management for conversation history
+- Connection to n8n workflow via webhook
+- Responsive design for desktop and mobile use
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Important Notes
+- This application must be able to reach your n8n cloud instance webhook URL
+- CORS settings on your n8n instance may need to be configured to allow requests from your app's domain
+- For security, always use environment variables for sensitive information in production deployments
 
-## Learn More
+## Troubleshooting
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### CORS Issues
+If you're experiencing CORS (Cross-Origin Resource Sharing) issues:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Ensure your n8n cloud instance is configured to accept requests from your app's domain
+2. Check if your browser is blocking the requests
+3. Consider using a CORS proxy during development if needed
+
+### Connection Problems
+If the chat application can't connect to your n8n webhook:
+
+1. Verify the webhook URL is correct
+2. Ensure your n8n workflow is active and running
+3. Check the browser console for error messages
