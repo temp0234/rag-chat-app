@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/rag-chat-app/static/css/main.92f55110.css",
+    "main.js": "/rag-chat-app/static/js/main.e86f3f16.js",
+    "static/js/453.8a63c947.chunk.js": "/rag-chat-app/static/js/453.8a63c947.chunk.js",
+    "index.html": "/rag-chat-app/index.html",
+    "main.92f55110.css.map": "/rag-chat-app/static/css/main.92f55110.css.map",
+    "main.e86f3f16.js.map": "/rag-chat-app/static/js/main.e86f3f16.js.map",
+    "453.8a63c947.chunk.js.map": "/rag-chat-app/static/js/453.8a63c947.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.92f55110.css",
+    "static/js/main.e86f3f16.js"
+  ]
+}
