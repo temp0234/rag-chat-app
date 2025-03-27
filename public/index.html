@@ -45,11 +45,37 @@
     <!-- End Single Page Apps for GitHub Pages -->
     
     <!-- Environment configuration -->
+    <script type="text/javascript">
+      // Create default ENV if config.js fails to load
+      window.ENV = window.ENV || {
+        REACT_APP_N8N_WEBHOOK_URL: "https://a3ai.app.n8n.cloud/webhook/e104e40e-6134-4825-a6f0-8a646d882662"
+      };
+    </script>
     <script src="%PUBLIC_URL%/config.js"></script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    
+    <!-- Debug information that will be removed when React loads -->
+    <div id="debug-info" style="padding: 20px; font-family: monospace;">
+      <h1>Loading Application...</h1>
+      <p>If you're seeing this message, the React app hasn't loaded properly.</p>
+      <p>Check the console for errors.</p>
+      <script>
+        document.write('<p>Current URL: ' + window.location.href + '</p>');
+        document.write('<p>Public URL: ' + '%PUBLIC_URL%' + '</p>');
+        document.write('<p>Environment: ' + JSON.stringify(window.ENV || {}) + '</p>');
+        
+        // Log to console
+        console.log('Debug info:', {
+          url: window.location.href,
+          publicUrl: '%PUBLIC_URL%',
+          env: window.ENV
+        });
+      </script>
+    </div>
+    
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
